@@ -7,4 +7,4 @@ urlpatterns = [
 
     path('project/<str:pk>/',views.project,name='project')
 
-]
+] 
