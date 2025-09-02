@@ -28,4 +28,8 @@ def projects(request):
     return  render(request,'projects/projects.html',context)
 
 def project(request,pk):
-    return render(request,'projects/single-project.html')
+    projectObj=None
+    for i in projectsList:
+        if i['id'] == pk:
+            projectObj = i
+    return render(request,'projects/single-project.html',{'project':projectObj})
