@@ -1,10 +1,19 @@
-
 {% extends 'main.html' %}
 
 {% block content %}
-{{msg}}
-<h1>projects template </h1>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, temporibus praesentium. Fuga voluptates ex, perferendis architecto sunt unde assumenda suscipit libero cupiditate possimus? Ipsam, iste consequatur. Magni omnis impedit architecto.</p>
+<h1> Projects template</h1>
+{%if number > 10 %}
+<p>Number is greather than 10</p>
+{%else%}
+<p>Number is less than 10</p>
+{% endif %}
 
-{% endblock content%}
+<hr>
+<h1>projects</h1>
+<ul>
+    {% for project in projects %}
+    <li>Name :{{project.title}}</li>
+    {%endfor%}
+</ul>
+{% endblock content %}
