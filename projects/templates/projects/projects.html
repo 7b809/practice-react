@@ -13,7 +13,7 @@
 <h1>projects</h1>
 <ul>
     {% for project in projects %}
-    <li>Name :{{project.title}} -- {{project.description}} </li>
+    <li>Title : <a href="/project/{{project.id}}">{{project.title}} </a> </li>
     {%endfor%}
 </ul>
 {% endblock content %}
