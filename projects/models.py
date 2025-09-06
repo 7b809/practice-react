@@ -1,12 +1,16 @@
 from django.db import models
 import  uuid
+from users.models import Profile
 # Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length=200)
-    
+    owner = models.ForeignKey(Profile,null=True,blank=True,
+                              on_delete=models.SET_NULL)
     # description can be empty null is for database and blank is for django i.e when usign in form.
     description = models.TextField(null=True,blank=True)
-
+    featured_image = models.ImageField(
+        null=True, blank=True, default="default.jpg")
+    
     demo_link = models.CharField(max_length=2000,null=True,blank=True)
     source_link = models.CharField(max_length=2000,null=True,blank=True)
     tags = models.ManyToManyField('Tag',blank=True)
