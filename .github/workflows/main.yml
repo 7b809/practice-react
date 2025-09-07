@@ -2,7 +2,7 @@ name: Mirror to Account2
 
 on:
   push:
-    branches: ["main"]   # or "master" if your default branch is master
+    branches: ["master"]   # or "master" if your default branch is master
   workflow_dispatch:      # ✅ allows you to run this manually from Actions tab
 
 
@@ -17,4 +17,4 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git remote add mirror https://x-access-token:${{ secrets.ACCOUNT2_TOKEN }}@github.com/theUser0011/fork-repo.git
-          git push mirror main --force
+          git push mirror master --force
