@@ -9,27 +9,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Validate PAT
-        run: |
-          echo "🔑 Checking Account2 PAT validity..."
-          curl -s -o response.json -w "%{http_code}" \
-            -H "Authorization: token ${{ secrets.ACCOUNT2_TOKEN }}" \
-            https://api.github.com/user > status.txt
+      # - name: Validate PAT
+      #   run: |
+      #     echo "🔑 Checking Account2 PAT validity..."
+      #     curl -s -o response.json -w "%{http_code}" \
+      #       -H "Authorization: token ${{ secrets.ACCOUNT2_TOKEN }}" \
+      #       https://api.github.com/user > status.txt
           
-          STATUS=$(cat status.txt)
-          if [ "$STATUS" != "200" ]; then
-            echo "❌ PAT is invalid or missing. Got status $STATUS"
-            cat response.json
-            exit 1
-          else
-            echo "✅ PAT is valid. Proceeding..."
-            cat response.json
-          fi
+      #     STATUS=$(cat status.txt)
+      #     if [ "$STATUS" != "200" ]; then
+      #       echo "❌ PAT is invalid or missing. Got status $STATUS"
+      #       cat response.json
+      #       exit 1
+      #     else
+      #       echo "✅ PAT is valid. Proceeding..."
+      #       cat response.json
+          # fi
           
       - name: Check PAT permissions
         run: |
           echo "🔎 Checking if PAT can access target repo..."
-          curl -s -H "Authorization: token ${{ secrets.ACCOUNT2_PAT }}" \
+          curl -s -H "Authorization: token ${{ secrets.ACCOUNT2_TOKEN }}" \
             https://api.github.com/repos/theUser0011/fork-repo \
             | jq '.permissions'
 
@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "actions@github.com"
 
           # Add Account2 remote
-          git remote add mirror https://theUser0011:${{ secrets.ACCOUNT2_PAT }}@github.com/theUser0011/fork-repo.git
+          git remote add mirror https://theUser0011:${{ secrets.ACCOUNT2_TOKEN }}@github.com/theUser0011/fork-repo.git
 
           # Push force to mirror
           git push mirror master --force
