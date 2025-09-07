@@ -3,6 +3,8 @@ name: Mirror to Account2
 on:
   push:
     branches: ["main"]   # or "master" if your default branch is master
+  workflow_dispatch:      # ✅ allows you to run this manually from Actions tab
+
 
 jobs:
   mirror:
